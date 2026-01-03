@@ -1,0 +1,28 @@
+{
+  "name": "stock-analysis",
+  "version": "1.0.0",
+  "description": "专业的股票分析工具，使用'股票简化分析法'进行系统化的公司分析和报告生成",
+  "author": "Claude Code AI",
+  "license": "MIT",
+  "keywords": ["stock", "analysis", "finance", "investment", "gemini", "ai"],
+  "main": "src/stock_analyzer.py",
+  "scripts": {
+    "install": "pip install -r requirements.txt",
+    "analyze": "python src/stock_analyzer.py",
+    "test": "python tests/test_analyzer.py"
+  },
+  "dependencies": {
+    "python": ">=3.9",
+    "google-generativeai": ">=0.3.0",
+    "requests": ">=2.31.0",
+    "beautifulsoup4": ">=4.12.0",
+    "pandas": ">=2.0.0",
+    "tushare": ">=1.2.80"
+  },
+  "config": {
+    "api_key_required": true,
+    "api_key_name": "GEMINI_API_KEY",
+    "supported_formats": ["pdf", "html", "url"],
+    "max_file_size": "10MB"
+  }
+}
