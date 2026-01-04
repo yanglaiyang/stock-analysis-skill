@@ -1,5 +1,6 @@
 # 📊 股票简化分析法 (Stock Simplified Analysis Method)
 
+[![Version](https://img.shields.io/badge/version-v1.0.0-blue.svg)](https://github.com/yanglaiyang/stock-analysis-skill/releases/tag/v1.0.0)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/release/python-390/)
 
@@ -36,7 +37,7 @@
 
 1. 克隆仓库
 ```bash
-git clone https://github.com/yourusername/stock-analysis-skill.git
+git clone https://github.com/yanglaiyang/stock-analysis-skill.git
 cd stock-analysis-skill
 ```
 
@@ -170,8 +171,13 @@ python tests/test_analyzer.py
 
 ## 📮 联系方式
 
-如有问题或建议，请提交 [Issue](https://github.com/yourusername/stock-analysis-skill/issues)
+- **邮箱**: 1690295017@qq.com
+- **微信**: yangbruant
+- **GitHub Issues**: [提交问题](https://github.com/yanglaiyang/stock-analysis-skill/issues)
+
+欢迎通过以上方式联系我，或直接提交 Issue 和 Pull Request！
 
 ---
 
-**Made with ❤️ by Claude Code AI**
+**Made with ❤️ by yanglaiyang**
+
