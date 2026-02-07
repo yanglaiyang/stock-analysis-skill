@@ -16,8 +16,7 @@
     "google-generativeai": ">=0.3.0",
     "requests": ">=2.31.0",
     "beautifulsoup4": ">=4.12.0",
-    "pandas": ">=2.0.0",
-    "tushare": ">=1.2.80"
+    "pandas": ">=2.0.0"
   },
   "config": {
     "api_key_required": true,

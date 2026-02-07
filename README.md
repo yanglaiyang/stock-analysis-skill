@@ -1,18 +1,23 @@
 # 📊 股票简化分析法 (Stock Simplified Analysis Method)
 
-[![Version](https://img.shields.io/badge/version-v1.0.0-blue.svg)](https://github.com/yanglaiyang/stock-analysis-skill/releases/tag/v1.0.0)
+[![Version](https://img.shields.io/badge/version-v2.0.0-blue.svg)](https://github.com/yanglaiyang/stock-analysis-skill/releases/tag/v2.0.0)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/release/python-390/)
+[![Tests](https://img.shields.io/badge/tests-7%2F7%20passing-success.svg)](src/test_chart_optimization.py)
 
-一个专业、系统化的股票分析工具，使用Gemini AI执行"股票简化分析法"七步分析框架，生成机构级股票分析报告。
+一个专业、系统化的股票分析工具，使用AI执行"股票简化分析法"七步分析框架，生成机构级股票分析报告，支持15种专业可视化图表。
 
 ## ✨ 特性
 
 - 🎯 **七步系统化分析**: 从业务阶段到估值的完整分析框架
 - 🤖 **AI驱动**: 基于Gemini AI的智能分析能力
+- 📊 **15种专业图表**: 雷达图、矩阵图、热力图等可视化
+- 🌏 **完美中文支持**: 自动检测字体，跨平台兼容
+- 🖥️ **无GUI环境支持**: 可在服务器/Docker环境中运行
 - 📄 **多格式支持**: 支持PDF、HTML、URL等多种数据源
 - 🔄 **自动重试**: 内置API限流处理机制
 - 📝 **Markdown报告**: 生成格式精美的分析报告
+- ✅ **完整测试**: 7/7测试通过，代码质量保证
 
 ## 🔍 分析框架
 
@@ -131,20 +136,80 @@ python src/stock_analyzer.py -c "腾讯控股, 00700.HK" \
 ```
 stock-analysis-skill/
 ├── src/
-│   └── stock_analyzer.py    # 主程序
+│   ├── stock_analyzer.py        # 主程序
+│   ├── chart_generator.py       # 图表生成器（已优化）
+│   ├── font_config.py           # 字体配置模块（新增）
+│   ├── chart_generator_v2.py    # 图表增强补丁（新增）
+│   └── test_chart_optimization.py # 测试脚本（新增）
 ├── tests/
-│   └── test_analyzer.py     # 测试文件
+│   └── test_analyzer.py         # 单元测试
 ├── docs/
-│   └── analysis_framework.md # 分析框架文档
-├── requirements.txt          # 依赖列表
-├── README.md                # 本文件
-└── skill.json              # Skill配置文件
+│   └── analysis_framework.md    # 分析框架文档
+├── requirements.txt             # 依赖列表
+├── README.md                    # 本文件
+├── CHART_OPTIMIZATION_SUMMARY.md # 图表优化说明（新增）
+└── skill.json                   # Skill配置文件
 ```
 
 ### 运行测试
 
+**图表优化测试**:
+```bash
+python src/test_chart_optimization.py
+```
+
+**单元测试**:
 ```bash
 python tests/test_analyzer.py
+```
+
+## 📊 图表系统
+
+### 支持的图表类型
+
+本工具支持 15 种专业可视化图表：
+
+| 图表类型 | 说明 | 状态 |
+|---------|------|------|
+| 投资评分雷达图 | 五维评分可视化 | ✅ |
+| 核心财务指标卡片 | 关键财务数据展示 | ✅ |
+| 业务阶段时间轴 | 公司发展阶段 | ✅ |
+| 商业画布图 | 商业模式分析 | ✅ |
+| 产品矩阵象限图 | 产品组合分析 | ✅ |
+| 护城河雷达图 | 竞争优势评估 | ✅ |
+| 护城河瀑布图 | 护城河构成分析 | ✅ |
+| 财务指标热力图 | 财务健康度热力图 | ✅ |
+| 杜邦分析树状图 | ROE拆解分析 | ✅ |
+| 现金流桑基图 | 现金流分析 | ✅ |
+| 增长驱动力树状图 | 增长因素分析 | ✅ |
+| 增长阶段曲线 | 增长轨迹分析 | ✅ |
+| 风险矩阵图 | 风险评估矩阵 | ✅ |
+| 估值钟形曲线 | 估值区间分析 | ✅ |
+| 估值对比条形图 | 相对估值对比 | ✅ |
+
+### 图表优化 (v2.0)
+
+**主要改进**:
+- ✨ 中文字体自动检测和配置
+- ✨ 跨平台字体支持（macOS/Windows/Linux）
+- ✨ 无GUI环境支持（服务器/Docker）
+- 🐛 修复中文显示乱码问题
+- 🐛 修复PDF生成中文问题
+- ♻️ 添加数据验证和错误处理
+- ♻️ 添加类型提示
+
+详细的优化说明请参考 [CHART_OPTIMIZATION_SUMMARY.md](CHART_OPTIMIZATION_SUMMARY.md)
+
+### Linux 字体安装
+
+如果在Linux系统下图表中文显示为方块：
+
+```bash
+# Ubuntu/Debian
+sudo apt-get install fonts-wqy-microhei fonts-noto-cjk
+
+# CentOS/RHEL
+sudo yum install wqy-microhei-fonts
 ```
 
 ## 📚 分析框架详解
