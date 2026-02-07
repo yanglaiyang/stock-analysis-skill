@@ -15,9 +15,9 @@ class FontConfig:
     # 按优先级排列的中文字体列表
     CHINESE_FONTS = {
         'Darwin': [  # macOS
-            'Arial Unicode MS',
-            'PingFang SC',
             'Hiragino Sans GB',
+            'PingFang SC',
+            'Arial Unicode MS',
             'STHeiti',
             'Heiti TC',
             'Microsoft YaHei',
@@ -124,9 +124,9 @@ class FontConfig:
         """配置matplotlib使用中文字体"""
         if self.available_chinese_font:
             # 配置字体
-            plt.rcParams['font.sans-serif'] = [self.available_chinese_font] + self.FALLBACK_FONTS
+            plt.rcParams['font.sans-serif'] = [self.available_chinese_font]
             plt.rcParams['axes.unicode_minus'] = False  # 解决负号显示问题
-            plt.rcParams['font.family'] = 'sans-serif'
+            plt.rcParams['font.family'] = self.available_chinese_font
 
             # 打印配置信息
             print(f"✓ matplotlib已配置字体: {plt.rcParams['font.sans-serif'][0]}")

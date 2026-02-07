@@ -39,9 +39,9 @@ try:
     CHINESE_FONT = font_config.available_chinese_font if font_config else 'Arial Unicode MS'
 
     # 强制设置matplotlib字体
-    plt.rcParams['font.sans-serif'] = [CHINESE_FONT, 'SimHei', 'DejaVu Sans', 'Arial']
+    plt.rcParams['font.sans-serif'] = [CHINESE_FONT]
     plt.rcParams['axes.unicode_minus'] = False
-    plt.rcParams['font.family'] = 'sans-serif'
+    plt.rcParams['font.family'] = CHINESE_FONT
 
     # 提高图表质量和抗锯齿
     plt.rcParams['figure.dpi'] = 150
@@ -71,8 +71,9 @@ except ImportError:
     FONT_AVAILABLE = False
     CHINESE_FONT = 'Arial Unicode MS'
     # 回退到原配置
-    plt.rcParams['font.sans-serif'] = ['Arial Unicode MS', 'SimHei', 'DejaVu Sans']
+    plt.rcParams['font.sans-serif'] = ['Arial Unicode MS']
     plt.rcParams['axes.unicode_minus'] = False
+    plt.rcParams['font.family'] = 'Arial Unicode MS'
 
 # 蓝色商务风配色方案
 COLORS = {
@@ -129,8 +130,8 @@ class StockChartGenerator:
 
         # 强制应用中文字体（防止被样式覆盖）
         try:
-            mpl.rcParams['font.sans-serif'] = [CHINESE_FONT, 'Arial Unicode MS', 'SimHei', 'DejaVu Sans', 'Arial']
-            mpl.rcParams['font.family'] = 'sans-serif'
+            mpl.rcParams['font.sans-serif'] = [CHINESE_FONT]
+            mpl.rcParams['font.family'] = CHINESE_FONT
             mpl.rcParams['axes.unicode_minus'] = False
             sns.set_theme(style="whitegrid", font=CHINESE_FONT)
         except Exception:
@@ -691,12 +692,12 @@ class StockChartGenerator:
                    center=50, vmin=0, vmax=100,
                    cbar_kws={'label': '评分'},
                    linewidths=1, linecolor='white',
-                   ax=ax, annot_kws={'family': 'sans-serif', 'size': 11})
+                   ax=ax, annot_kws={'family': CHINESE_FONT, 'size': 11})
 
-        ax.set_xlabel('评估维度', fontsize=12, color=COLORS['dark'], fontfamily='sans-serif')
-        ax.set_ylabel('财务指标', fontsize=12, color=COLORS['dark'], fontfamily='sans-serif')
+        ax.set_xlabel('评估维度', fontsize=12, color=COLORS['dark'], fontfamily=CHINESE_FONT)
+        ax.set_ylabel('财务指标', fontsize=12, color=COLORS['dark'], fontfamily=CHINESE_FONT)
         plt.title('财务健康度热力图', fontsize=16, fontweight='bold',
-                 color=COLORS['dark'], pad=20, fontfamily='sans-serif')
+                 color=COLORS['dark'], pad=20, fontfamily=CHINESE_FONT)
 
         # 保存
         if save_path is None:
@@ -1121,17 +1122,17 @@ class StockChartGenerator:
 
         # 标签
         ax.text(fair_range[0], 0.1, f'低估\n<{fair_range[0]}倍',
-               ha='center', fontsize=10, color=COLORS['warning'], fontfamily='sans-serif')
+               ha='center', fontsize=10, color=COLORS['warning'], fontfamily=CHINESE_FONT)
         ax.text(fair_range[1], 0.1, f'高估\n>{fair_range[1]}倍',
-               ha='center', fontsize=10, color=COLORS['danger'], fontfamily='sans-serif')
+               ha='center', fontsize=10, color=COLORS['danger'], fontfamily=CHINESE_FONT)
         ax.text(mu, 0.1, f'合理\n{fair_range[0]}-{fair_range[1]}倍',
-               ha='center', fontsize=10, color=COLORS['success'], fontfamily='sans-serif')
+               ha='center', fontsize=10, color=COLORS['success'], fontfamily=CHINESE_FONT)
 
-        ax.set_xlabel('市盈率 (PE)', fontsize=12, color=COLORS['dark'], fontfamily='sans-serif')
-        ax.set_ylabel('概率密度', fontsize=12, color=COLORS['dark'], fontfamily='sans-serif')
-        ax.legend(loc='upper right', prop={'family': 'sans-serif', 'size': 10})
+        ax.set_xlabel('市盈率 (PE)', fontsize=12, color=COLORS['dark'], fontfamily=CHINESE_FONT)
+        ax.set_ylabel('概率密度', fontsize=12, color=COLORS['dark'], fontfamily=CHINESE_FONT)
+        ax.legend(loc='upper right', prop={'family': CHINESE_FONT, 'size': 10})
         plt.title('估值区间分析', fontsize=16, fontweight='bold',
-                 color=COLORS['dark'], pad=20, fontfamily='sans-serif')
+                 color=COLORS['dark'], pad=20, fontfamily=CHINESE_FONT)
 
         # 保存 - 使用更高DPI和质量
         if save_path is None:
@@ -1178,13 +1179,13 @@ class StockChartGenerator:
         for bar, pe in zip(bars, pes):
             ax.text(bar.get_width() + 0.5, bar.get_y() + bar.get_height()/2,
                    f'{pe:.1f}倍', va='center', fontsize=10,
-                   color=COLORS['dark'], fontweight='bold', fontfamily='sans-serif')
+                   color=COLORS['dark'], fontweight='bold', fontfamily=CHINESE_FONT)
 
-        ax.set_xlabel('市盈率 (PE)', fontsize=12, color=COLORS['dark'], fontfamily='sans-serif')
+        ax.set_xlabel('市盈率 (PE)', fontsize=12, color=COLORS['dark'], fontfamily=CHINESE_FONT)
         ax.axvline(x=current_pe, color=COLORS['accent'],
                   linestyle='--', linewidth=2, alpha=0.7)
         plt.title('估值对比分析', fontsize=16, fontweight='bold',
-                 color=COLORS['dark'], pad=20, fontfamily='sans-serif')
+                 color=COLORS['dark'], pad=20, fontfamily=CHINESE_FONT)
 
         # 保存
         if save_path is None:
