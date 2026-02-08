@@ -40,6 +40,13 @@ Thumbs.db
 # Project specific
 *.md
 !README.md
+!PROJECT_STATUS.md
+!HTML_REPORT_DONE.md
+!HTML_REPORT_COMPLETE.md
+!SKILL_INTEGRATION_COMPLETE.md
+!CHINESE_FONT_FIX_REPORT.md
+!CHART_OPTIMIZATION_SUMMARY.md
+!PRIORITY_UPDATE_SUMMARY.md
 !.claude/skills/**/SKILL.md
 !.claude/skills/**/reference.md
 !.claude/skills/**/examples.md

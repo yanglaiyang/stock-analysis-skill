@@ -5,7 +5,7 @@
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/release/python-390/)
 [![Tests](https://img.shields.io/badge/tests-7%2F7%20passing-success.svg)](src/test_chart_optimization.py)
 
-一个专业、系统化的股票分析工具，使用AI执行"股票简化分析法"七步分析框架，生成机构级股票分析报告，支持15种专业可视化图表，并支持复杂HTML图表结构与Mermaid渲染。
+一个专业、系统化的股票分析工具，使用AI执行"股票简化分析法"七步分析框架，生成机构级股票分析报告，支持15种专业可视化图表，并支持复杂HTML图表结构与Mermaid渲染。新版本已**符合 Claude Code Skill 规范**。
 
 ## ✨ 特性
 
