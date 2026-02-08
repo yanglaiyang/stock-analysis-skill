@@ -154,6 +154,24 @@ python src/stock_analyzer.py -c "腾讯控股, 00700.HK" \
 - **估值框架分析** - 提供估值视角
 - **数据来源附录** - 完整的数据来源
 
+## 📊 可视化案例（新华人寿 601336.SH）
+
+以下为实际运行生成的**展示级案例**，用于直观展示报告结构与图表效果（仅展示格式与能力，不构成投资建议）。
+
+**主要结论（示例）**
+- 业务阶段：经营杠杆期（业绩稳定、盈利能力较强）
+- 核心业务：寿险为主，健康险/意外险为补充
+- 护城河：中等强度（品牌与牌照优势，客户转换成本中等）
+- 增长前景：中等（依赖产品创新与渠道效率提升）
+- 风险提示：政策、利率与资本市场波动带来的不确定性
+
+**关键图表**
+
+![投资评分雷达图](docs/assets/xinhua-life/investment_radar.png)
+![护城河雷达图](docs/assets/xinhua-life/moat_radar.png)
+![财务健康热力图](docs/assets/xinhua-life/financial_heatmap.png)
+![估值区间分析](docs/assets/xinhua-life/valuation_bell_curve.png)
+
 ## 🛠️ 开发
 
 ### 项目结构
