@@ -6,8 +6,8 @@ Subagent架构测试脚本
 import os
 import sys
 
-# 设置API密钥
-os.environ['GEMINI_API_KEY'] = 'AIzaSyDP_myOyFmxEsPUeBUnUlD4Pk-samohduI'
+# 读取API密钥（不要硬编码到仓库）
+API_KEY = os.getenv('GEMINI_API_KEY') or os.getenv('GOOGLE_API_KEY')
 
 # 导入Subagent系统
 from src.subagents import SubagentOrchestrator
@@ -19,8 +19,12 @@ def test_subagent_basic():
     print("="*60 + "\n")
 
     try:
+        if not API_KEY:
+            print("⚠️  未检测到 GEMINI_API_KEY / GOOGLE_API_KEY，跳过此测试\n")
+            return True
+
         # 创建协调器
-        orchestrator = SubagentOrchestrator(os.environ['GEMINI_API_KEY'])
+        orchestrator = SubagentOrchestrator(API_KEY)
         print("✅ Subagent协调器初始化成功\n")
 
         # 测试单个Subagent
@@ -71,7 +75,11 @@ def test_full_analysis():
     print("="*60 + "\n")
 
     try:
-        orchestrator = SubagentOrchestrator(os.environ['GEMINI_API_KEY'])
+        if not API_KEY:
+            print("⚠️  未检测到 GEMINI_API_KEY / GOOGLE_API_KEY，跳过此测试\n")
+            return True
+
+        orchestrator = SubagentOrchestrator(API_KEY)
 
         # 只测试前3步（节省时间）
         print("📊 执行步骤1: 业务阶段分析...")

@@ -9,7 +9,7 @@ system_prompt = """
 4. **禁止**：渐进式叙述、模糊表述、把结论藏在最后
 
 **📊 可视化要求**：
-1. 必须包含业务阶段决策树（使用Mermaid格式）
+1. 必须包含业务阶段判断路径（使用文字描述）
 2. 必须包含财务指标对比表格
 3. 使用颜色编码：🔴红色（警告）、🟡黄色（关注）、🟢绿色（健康）
 
@@ -39,21 +39,10 @@ system_prompt = """
 | 收入增长 | [百分比] | >10%/下滑 | 🔴/🟡/🟢 |
 | 资本回报 | [是/否] | 分红/回购 | 🔴/🟢 |
 
-**业务阶段决策树**：
-```mermaid
-graph TD
-    Start[开始] --> Check1{检查资本回报<br>分红/回购?}
-    Check1 -- 是 --> Phase5[第五阶段<br>资本回报期]
-    Check1 -- 否 --> Check2{检查营业利润<br>正/负?}
-    Check2 -- 负 --> Check3{亏损分析}
-    Check2 -- 正 --> Check4{检查收入增长}
-    Check4 -- 下滑 --> Phase6[第六阶段<br>衰退期]
-    Check4 -- 增长 --> Phase4[第四阶段<br>经营杠杆期]
-    style Start fill:#f9f,stroke:#333,stroke-width:2px
-    style Phase5 fill:#9f9,stroke:#333,stroke-width:2px
-    style Phase4 fill:#ff9,stroke:#333,stroke-width:2px
-    style Phase6 fill:#f99,stroke:#333,stroke-width:2px
-```
+**业务阶段判定路径**：
+1. [步骤1] -> [结果]
+2. [步骤2] -> [结果]
+3. ➡️ 最终判定：[阶段名称]
 
 ### 💡 深度洞察
 [基于数据的专业分析和建议]

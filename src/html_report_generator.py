@@ -16,6 +16,7 @@ import os
 import sys
 import base64
 import re
+import html
 from pathlib import Path
 from datetime import datetime
 
@@ -557,6 +558,7 @@ HTML_TEMPLATE = """
         </div>
     </div>
 
+    {{ mermaid_script }}
     <script>
         // 平滑滚动
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -693,6 +695,74 @@ class HtmlReportGenerator:
 
         return img_re.sub(_replace, html_body)
 
+    def _load_mermaid_script(self) -> str:
+        """
+        尝试加载本地mermaid脚本并内嵌；若不存在则使用CDN
+        """
+        candidates = [
+            Path(__file__).parent / 'assets' / 'mermaid.min.js',
+            Path.cwd() / 'assets' / 'mermaid.min.js',
+        ]
+
+        for p in candidates:
+            if p.exists():
+                try:
+                    content = p.read_text(encoding='utf-8', errors='ignore')
+                    return (
+                        "<script>\\n"
+                        + content
+                        + "\\n"
+                        + "if (window.mermaid) { window.mermaid.initialize({ startOnLoad: true }); }\\n"
+                        + "</script>"
+                    )
+                except Exception:
+                    pass
+
+        # CDN fallback（需要联网）
+        return (
+            "<script>\\n"
+            "(function(){var s=document.createElement('script');"
+            "s.src='https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js';"
+            "s.onload=function(){if(window.mermaid){window.mermaid.initialize({startOnLoad:true});}};"
+            "document.head.appendChild(s);})();\\n"
+            "</script>"
+        )
+
+    def _render_mermaid_blocks(self, html_body: str) -> str:
+        """
+        将Markdown转换后的mermaid代码块替换为可渲染的div
+        """
+        pattern = re.compile(
+            r'<pre><code class="language-mermaid">(.*?)</code></pre>',
+            re.DOTALL | re.IGNORECASE
+        )
+
+        def _replace(match):
+            code_html = match.group(1)
+            code = html.unescape(code_html)
+            code = code.replace('<br>', '\n').replace('<br/>', '\n').replace('<br />', '\n')
+            return f'<div class="mermaid">{code}</div>'
+
+        return pattern.sub(_replace, html_body)
+
+    def _convert_mermaid_fences(self, markdown_text: str) -> str:
+        """
+        将Markdown中的```mermaid代码块转换为HTML div，避免被转义
+        """
+        pattern = re.compile(r'```mermaid\\s*(.*?)```', re.DOTALL | re.IGNORECASE)
+
+        def _replace(match):
+            code = match.group(1).strip()
+            return f'<div class="mermaid">{code}</div>'
+
+        return pattern.sub(_replace, markdown_text)
+
+    def _remove_empty_images(self, html_body: str) -> str:
+        """
+        移除空src的图片标签，避免显示为断裂图标
+        """
+        return re.sub(r'<img[^>]*src=["\']\\s*["\'][^>]*>', '', html_body, flags=re.IGNORECASE)
+
     def generate_report(self, markdown_content: str, chart_paths: dict,
                        output_path: str = None, title: str = "股票分析报告"):
         """
@@ -800,6 +870,9 @@ class HtmlReportGenerator:
             else:
                 print(f"  ✗ processed_md中未找到: {placeholder[:60]}")
 
+        # 2.1 Mermaid代码块转HTML（避免被转义）
+        processed_md = self._convert_mermaid_fences(processed_md)
+
         # 3. 转换 Markdown 为 HTML
         print("\n📝 转换 Markdown 为 HTML...")
 
@@ -862,8 +935,14 @@ class HtmlReportGenerator:
 
         print(f"\n✅ 成功嵌入 {charts_embedded} 张图表")
 
-        # 4.1 尝试将Markdown图片路径转为Base64（增强兼容）
+        # 4.1 mermaid代码块转为可渲染div（针对已被Markdown转义的场景）
+        html_body = self._render_mermaid_blocks(html_body)
+
+        # 4.2 尝试将Markdown图片路径转为Base64（增强兼容）
         html_body = self._embed_local_images_in_html(html_body, output_path, chart_paths)
+
+        # 4.3 清理空图片
+        html_body = self._remove_empty_images(html_body)
 
         # 5. 渲染模板
         print("🎨 渲染HTML模板...")
@@ -873,6 +952,7 @@ class HtmlReportGenerator:
             final_html = template.render(
                 title=title,
                 content=html_body,
+                mermaid_script=self._load_mermaid_script(),
                 timestamp=datetime.now().strftime("%Y年%m月%d日 %H:%M:%S")
             )
             print("✓ 模板渲染成功")
