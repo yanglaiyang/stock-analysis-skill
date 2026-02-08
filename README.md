@@ -5,18 +5,21 @@
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/release/python-390/)
 [![Tests](https://img.shields.io/badge/tests-7%2F7%20passing-success.svg)](src/test_chart_optimization.py)
 
-一个专业、系统化的股票分析工具，使用AI执行"股票简化分析法"七步分析框架，生成机构级股票分析报告，支持15种专业可视化图表。
+一个专业、系统化的股票分析工具，使用AI执行"股票简化分析法"七步分析框架，生成机构级股票分析报告，支持15种专业可视化图表，并支持复杂HTML图表结构与Mermaid渲染。
 
 ## ✨ 特性
 
 - 🎯 **七步系统化分析**: 从业务阶段到估值的完整分析框架
 - 🤖 **AI驱动**: 基于Gemini AI的智能分析能力
+- 🔗 **Tushare MCP支持**: 可接入实时/结构化数据源
+- 🧠 **Subagent架构**: 7个专业化分析Agent协作完成全流程分析
 - 📊 **15种专业图表**: 雷达图、矩阵图、热力图等可视化
 - 🌏 **完美中文支持**: 自动检测字体，跨平台兼容
 - 🖥️ **无GUI环境支持**: 可在服务器/Docker环境中运行
 - 📄 **多格式支持**: 支持PDF、HTML、URL等多种数据源
 - 🔄 **自动重试**: 内置API限流处理机制
 - 📝 **Markdown报告**: 生成格式精美的分析报告
+- 🧩 **复杂HTML图表**: 支持多图表布局、Mermaid流程/决策树渲染
 - ✅ **完整测试**: 7/7测试通过，代码质量保证
 
 ## 🔍 分析框架
