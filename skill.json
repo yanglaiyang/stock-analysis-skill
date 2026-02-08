@@ -1,6 +1,6 @@
 {
   "name": "stock-analysis",
-  "version": "1.0.0",
+  "version": "2.1.0",
   "description": "专业的股票分析工具，使用'股票简化分析法'进行系统化的公司分析和报告生成",
   "author": "Claude Code AI",
   "license": "MIT",

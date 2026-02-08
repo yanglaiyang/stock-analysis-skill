@@ -1,6 +1,6 @@
 # 📊 股票简化分析法 (Stock Simplified Analysis Method)
 
-[![Version](https://img.shields.io/badge/version-v2.0.0-blue.svg)](https://github.com/yanglaiyang/stock-analysis-skill/releases/tag/v2.0.0)
+[![Version](https://img.shields.io/badge/version-v2.1.0-blue.svg)](https://github.com/yanglaiyang/stock-analysis-skill/releases/tag/v2.1.0)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/release/python-390/)
 [![Tests](https://img.shields.io/badge/tests-7%2F7%20passing-success.svg)](src/test_chart_optimization.py)
@@ -66,6 +66,28 @@ $env:GEMINI_API_KEY='your_api_key_here'
 或使用 `--api-key` 参数直接传入。
 
 ## 🚀 使用方法
+
+### 作为 Claude Skill 使用
+
+本项目包含 Claude Skill 规范文件：
+
+- `.claude/skills/stock-analysis/SKILL.md`
+- `.claude/skills/stock-analysis/reference.md`
+- `.claude/skills/stock-analysis/examples.md`
+
+当作为 Skill 使用时，直接按以下格式调用：
+
+```text
+股票分析：公司名, 代码
+```
+
+示例：
+
+```text
+股票分析：新华人寿, 601336.SH
+```
+
+> 注意：完整在线分析需要环境变量 `GEMINI_API_KEY` 或 `GOOGLE_API_KEY`。
 
 ### 基本用法
 
@@ -245,4 +267,3 @@ sudo yum install wqy-microhei-fonts
 ---
 
 **Made with ❤️ by yanglaiyang**
-
